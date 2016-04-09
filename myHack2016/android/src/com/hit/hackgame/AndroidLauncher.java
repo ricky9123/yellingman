@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.hit.hackgame.Yelling;
+import com.hit.hackgame.main.Yelling;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

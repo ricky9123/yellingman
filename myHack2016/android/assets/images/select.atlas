@@ -1,0 +1,33 @@
+
+input1.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+3
+  rotate: false
+  xy: 2, 2
+  size: 255, 169
+  orig: 255, 169
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2, 173
+  size: 255, 169
+  orig: 255, 169
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 2, 344
+  size: 255, 169
+  orig: 255, 169
+  offset: 0, 0
+  index: -1
+0
+  rotate: false
+  xy: 2, 515
+  size: 255, 169
+  orig: 255, 169
+  offset: 0, 0
+  index: -1

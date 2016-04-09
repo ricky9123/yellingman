@@ -6,26 +6,26 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.hit.hackgame.main.Yelling;
 
 public class ZhiZhang extends GameSprite {
-	// ÊµÀý»¯ÕÏ°­ÎÆÀí
+	// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Texture tex;
 
 	private TextureRegion texr;
 
 	public ZhiZhang(Body body) {
 		super(body);
-		// ÕÏ°­ÎÆÀí¸³Öµ
-		tex = Yelling.assetManager.get("images/patch.png", Texture.class);
+		// ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+		tex = Yelling.assetManager.get("images/s_patch.png", Texture.class);
 
 		texr = new TextureRegion(tex,32,32);
-		// ÕÏ°­ÎÆÀíÊý×é
+		// ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		TextureRegion[] region = new TextureRegion[1] ;
 
 		region[0] = texr;
-		// ÊµÀý»¯¶¯»­
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		setAnimation(region, 1 / 8f);
-		// ¶¯»­¿í¶È
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		width = region[0].getRegionWidth();
-		// ¶¯»­¸ß¶È
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
 		height = region[0].getRegionHeight();
 	}
 }

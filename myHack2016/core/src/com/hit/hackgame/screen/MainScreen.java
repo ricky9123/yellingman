@@ -1,10 +1,11 @@
 package com.hit.hackgame.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,22 +17,22 @@ import static com.hit.hackgame.main.Yelling.ViewPort_HEIGHT;
 import static com.hit.hackgame.main.Yelling.ViewPort_WIDTH;
 import static com.hit.hackgame.main.Yelling.assetManager;
 
+
 public class MainScreen extends YellScreen {
-	// ÉùÃ÷ÎèÌ¨
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 	private Stage stage;
-	// ÉùÃ÷ÊÓ¾à
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½
 	private StretchViewport viewport;
-	// ÉùÃ÷Í¼¼¯
-	private TextureAtlas atlas;
-	// ÉùÃ÷Í¼Æ¬ÎÆÀí
+
+	// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 	private Image[] images;
-	// ÉùÃ÷¿ªÊ¼½çÃæÍ¼Æ¬
-	private Image image;
-	// ÉùÃ÷±³¾°Í¼Æ¬
-	private Image imageBg;
-	// ÉùÃ÷±³¾°Óë¿ªÊ¼½çÃæÎÆÀí
-	private Texture bg, startTexture;
-	// ÉùÃ÷²»Í¬½çÃæÇĞ»»±äÁ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
+	private Image startimage;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
+	private Image initimage;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¿ªÊ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Texture initbg, startbg;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static boolean Debug = true;
 
 	public MainScreen(Yelling game) {
@@ -40,83 +41,94 @@ public class MainScreen extends YellScreen {
 	}
 
 	public void init() {
-		// ÊµÀı»¯ÊÓ¾à
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½
 		viewport = new StretchViewport(ViewPort_WIDTH, ViewPort_HEIGHT);
-		// ÊµÀı»¯ÎèÌ¨
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 		stage = new Stage(viewport);
-		// »ñÈ¡Í¼¼¯
-		atlas = assetManager.get("images/select.atlas");
-		// »ñÈ¡±³¾°ÎÆÀí
-		bg = assetManager.get("images/bg.png");
-		// »ñÈ¡¿ªÊ¼½çÃæÎÆÀí
-		startTexture = assetManager.get("images/start.png");
-		// ÊµÀı»¯¿ªÊ¼½çÃæÍ¼Æ¬¿Ø¼ş
-		image = new Image(startTexture);
-		// ÊµÀı»¯±³¾°¿Ø¼ş
-		imageBg = new Image(bg);
-		// Éè¶¨±³¾°Í¼Æ¬´óĞ¡
-		image.setSize(ViewPort_WIDTH, ViewPort_HEIGHT);
-		// ÊµÀı»¯Í¼Æ¬¿Ø¼şÊı×é
-		images = new Image[4];
-		// ±éÀúÊı×é»ñÈ¡Í¼Æ¬
-		for (int i = 0; i < images.length; i++) {
-			// ÊµÀı»¯Êı×éÖĞµ¥¸öÍ¼Æ¬
-			images[i] = new Image(atlas.findRegion("" + i));
-			// Ëõ·ÅÍ¼Æ¬
-			images[i].setScale(0.50f);
+		// ï¿½ï¿½È¡Í¼ï¿½ï¿½
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		initbg = assetManager.get("images/init.png");
+		// ï¿½ï¿½È¡ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		startbg = assetManager.get("images/start.png");
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ø¼ï¿½
+		startimage = new Image(startbg);
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
+		initimage = new Image(initbg);
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ğ¡
+		initimage.setSize(ViewPort_WIDTH, ViewPort_HEIGHT);
+		// Êµï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½
+
+		Texture now = new Texture(Gdx.files.internal("images/init.png"));
+
+		TextureRegion[] nowr = new TextureRegion[3];
+		nowr[0] = new TextureRegion(now,98,324,110,107);
+		nowr[1] = new TextureRegion(now,306,324,110,107);
+		nowr[2] = new TextureRegion(now,506,324,110,107);
+		images = new Image[3];
+		for (int i = 0 ; i < 3 ; i ++){
+			images[i] = new Image(nowr[i]);
 		}
-		// ÉèÖÃÍ¼Æ¬Î»ÖÃ
-		images[0].setPosition(20, 140);
-		// ÉèÖÃÍ¼Æ¬Î»ÖÃ
-		images[1].setPosition(170, 140);
-		// ÉèÖÃÍ¼Æ¬Î»ÖÃ
-		images[2].setPosition(20, 20);
-		// ÉèÖÃÍ¼Æ¬Î»ÖÃ
-		images[3].setPosition(170, 20);
-		// ³õÊ¼»¯¼àÌıÆ÷
+
+		// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Î»ï¿½ï¿½
+		images[0].setPosition(98, 20);
+		// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Î»ï¿½ï¿½
+		images[1].setPosition(306, 20);
+		// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Î»ï¿½ï¿½
+		images[2].setPosition(506, 20);
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		initListener();
-		// ×¢²áÎèÌ¨¼àÌı
+		// ×¢ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½
 		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
 	public void render(float delta) {
-		// ÇåÆÁ
+		// ï¿½ï¿½ï¿½ï¿½
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		// ¸üĞÂ³¡¾°Âß¼­
+		// ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
 		update(delta);
-		// ¸üĞÂÎèÌ¨Âß¼­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ß¼ï¿½
 		stage.act();
-		// »æÖÆÎèÌ¨
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 		stage.draw();
 
 	}
 
 	private void initListener() {
-		// ¿ªÊ¼½çÃæÍ¼Æ¬±»µã»÷£¬È¡Ïû»æÖÆµ±Ç°³¡¾°£¬¼´Debug¸³ÖµÎª¼Ù¡£
-		image.addListener(new ClickListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Debugï¿½ï¿½ÖµÎªï¿½Ù¡ï¿½
+		//startç•Œé¢ç›‘å¬å‡½æ•°
+		startimage.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
 
-				Debug = false;
+                Debug = false;
 
-				return true;
-			}
-		});
+                Sound s = assetManager.get("audio/jiaosheng.wav", Sound.class);
+                s.play();
+
+                return true;
+            }
+        });
+
 		images[0].addListener(new ClickListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				// »ñÈ¡ÒôĞ§
+				// ï¿½ï¿½È¡ï¿½ï¿½Ğ§
 				Sound s = assetManager.get("audio/select.wav");
-				// ²¥·ÅÒôĞ§
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 				s.play();
-				// ÉèÖÃµ±Ç°Í¼Æ¬Îª½øÈëµÚÒ»¹Ø
+
+                //æ¸¸æˆèƒŒæ™¯éŸ³
+                Music m = assetManager.get("audio/schnappi.mp3");
+                m.play();
+
+				// ï¿½ï¿½ï¿½Ãµï¿½Ç°Í¼Æ¬Îªï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 				GameScreen.level = 0;
-				// ÊµÀı»¯µÚÒ»¹ØÓÎÏ·³¡¾°
+				// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 				GameScreen g = new GameScreen(game);
-				// ½«µ±Ç°³¡¾°ÖÁÓÚÕ»¶¥
+				// ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½
 				game.setScreen(g);
 				return true;
 			}
@@ -127,9 +139,11 @@ public class MainScreen extends YellScreen {
 					int pointer, int button) {
 				Sound s = assetManager.get("audio/select.wav");
 				s.play();
-				GameScreen.level = 1;
-				GameScreen g = new GameScreen(game);
-				game.setScreen(g);
+
+
+//				GameScreen.level = 1;
+//				GameScreen g = new GameScreen(game);
+//				game.setScreen(g);
 				return true;
 			}
 		});
@@ -139,31 +153,20 @@ public class MainScreen extends YellScreen {
 					int pointer, int button) {
 				Sound s = assetManager.get("audio/select.wav");
 				s.play();
-				GameScreen.level = 2;
-				GameScreen g = new GameScreen(game);
-				game.setScreen(g);
+//				GameScreen.level = 2;
+//				GameScreen g = new GameScreen(game);
+//				game.setScreen(g);
 				return true;
 			}
 		});
-		images[3].addListener(new ClickListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				Sound s = assetManager.get("audio/select.wav");
-				s.play();
-				GameScreen.level = 3;
-				GameScreen g = new GameScreen(game);
-				game.setScreen(g);
-				return true;
-			}
-		});
+
 	}
 
 	@Override
 	public void hide() {
-		// µ±Ç°³¡¾°Òş²ØÊ±£¬Çé¿öÎèÌ¨ÑİÔ±
+		// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½Ô±
 		stage.clear();
-		// Ïú»ÙÎèÌ¨
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 		stage.dispose();
 	}
 
@@ -173,18 +176,18 @@ public class MainScreen extends YellScreen {
 
 	@Override
 	public void update(float dt) {
-		// Èç¹ûDebugÎªÕæµÄ»°£¬Çå¿Õµ±Ç°ÎèÌ¨ËùÓĞÑİÔ±£¬½«¿ªÊ¼Í¼Æ¬¼ÓÈëÎèÌ¨
+		// ï¿½ï¿½ï¿½DebugÎªï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½Ç°ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 		if (Debug) {
-			// Çå¿ÕÎèÌ¨
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 			stage.getActors().clear();
-			// Ìí¼Ó¿ªÊ¼Í¼Æ¬µ½ÎèÌ¨
-			stage.addActor(image);
+			// ï¿½ï¿½Ó¿ï¿½Ê¼Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ì¨
+			stage.addActor(startimage);
 		} else {
-			// Çå¿ÕÎèÌ¨
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
 			stage.getActors().clear();
-			// Ìí¼ÓÓÎÏ·±³¾°
-			stage.addActor(imageBg);
-			// ±äÁ¿Í¼Æ¬¿Ø¼şÊı×é£¬Ìí¼Óµ½ÎèÌ¨
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
+			stage.addActor(initimage);
+			// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½Óµï¿½ï¿½ï¿½Ì¨
 			for (int i = 0; i < images.length; i++) {
 				stage.addActor(images[i]);
 			}

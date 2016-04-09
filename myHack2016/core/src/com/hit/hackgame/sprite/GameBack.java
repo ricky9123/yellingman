@@ -4,21 +4,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hit.hackgame.main.Yelling;
 
-public class Tree {
-	// ÉùÃ÷±³¾°ÎÆÀí
+public class GameBack {
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Texture texture;
 
-	public Tree() {
-		// ÊµÀý»¯±³¾°ÎÆÀí
-		texture = Yelling.assetManager.get("images/tree.png");
+	public GameBack() {
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		texture = Yelling.assetManager.get("images/gamebg.png");
 	}
 
 	public void render(SpriteBatch batch) {
-		// ¿ªÊ¼»æÖÆ
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 		batch.begin();
-		// »æÖÆ±³¾°
+		// ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½
 		batch.draw(texture, 0, 0);
-		// ½áÊø»æÖÆ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		batch.end();
 	}
 }

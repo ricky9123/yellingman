@@ -7,74 +7,74 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.hit.hackgame.screen.GameScreen;
 import com.hit.hackgame.screen.MainScreen;
 
 public class Yelling extends Game {
-	// ÓÎÏ·±êÇ©
+	// ï¿½ï¿½Ï·ï¿½ï¿½Ç©
 	public static final String TAG = "PKUHackGame";
-	// ´°Ìå±êÇ©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
 	public static final String TITLE = "YellingMan";
-	// ÊÓ¾à¿í¶È
-	public static final int ViewPort_WIDTH = 320;
-	// ÊÓ¾à¸ß¶È
-	public static final int ViewPort_HEIGHT = 240;
-	// ´°Ìå·ÅËõ´óĞ¡
+	// ï¿½Ó¾ï¿½ï¿½ï¿½
+	public static final int ViewPort_WIDTH = 720;
+	// ï¿½Ó¾ï¿½ß¶ï¿½
+	public static final int ViewPort_HEIGHT = 450;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
 	public static final int Scale = 2;
-	// ¾«Áé»­±Ê
+	// ï¿½ï¿½ï¿½é»­ï¿½ï¿½
 	private SpriteBatch batch;
-	// ¾«ÁéÏà»ú
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private OrthographicCamera camera;
-	// ¿Ø¼şÏà»ú
+	// ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½
 	private OrthographicCamera uiCam;
-	// ÉùÃ÷Ö÷³¡¾°
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static MainScreen mainScreen;
-	// ÉùÃ÷ÓÎÏ·³¡¾°
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 	public static GameScreen gameScreen;
-	// ÉùÃ÷×ÊÔ´¼ÓÔØÆ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static AssetManager assetManager;
 
 	@Override
 	public void create() {
-		// ÊµÀı»¯×ÊÔ´¼ÓÔØÆ÷
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		assetManager = new AssetManager();
-		// Ô¤¼ÓÔØÓÎÏ·ÎÆÀí
-		assetManager.load("images/girl.png", Texture.class);
+		// Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 		assetManager.load("images/stars.png", Texture.class);
-		assetManager.load("images/patch.png", Texture.class);
-		assetManager.load("images/select.atlas", TextureAtlas.class);
-		assetManager.load("images/bg.png", Texture.class);
-		assetManager.load("images/tree.png", Texture.class);
 		assetManager.load("images/start.png", Texture.class);
-		// Ô¤¼ÓÔØÓÎÏ·ÒôĞ§
+		assetManager.load("images/gamebg.png", Texture.class);
+		assetManager.load("images/s_patch.png", Texture.class);
+		assetManager.load("images/yellingman.png", Texture.class);
+		assetManager.load("images/init.png", Texture.class);
+
+		// Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ğ§
 		assetManager.load("audio/music.ogg", Music.class);
-		assetManager.load("audio/diamond.ogg", Music.class);
 		assetManager.load("audio/contact.wav", Sound.class);
 		assetManager.load("audio/jump.wav", Sound.class);
 		assetManager.load("audio/select.wav", Sound.class);
-		// ¼ÓÔØÓÎÏ·×ÊÔ´
+		assetManager.load("audio/schnappi.mp3",Music.class);
+		assetManager.load("audio/jiaosheng.wav",Sound.class);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ô´
 		assetManager.finishLoading();
-		// ¼ÓÔØÓÎÏ·±³¾°ÒôÀÖ
-		Music music = assetManager.get("audio/music.ogg");
-		// Ñ­»·²¥·ÅÓÎÏ·±³¾°ÒôÀÖ
-		music.play();
+//		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		Music music = assetManager.get("audio/music.ogg");
+//		// Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		music.play();
 
-		// ÊµÀı»¯¾«Áé»­±Ê
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é»­ï¿½ï¿½
 		batch = new SpriteBatch();
-		// ÊµÀı»¯¾«ÁéÏà»ú
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		camera = new OrthographicCamera();
-		// ÉèÖÃÏà»úÊÓ¾à
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½
 		camera.setToOrtho(false, ViewPort_WIDTH, ViewPort_HEIGHT);
-		// ÊµÀı»¯¿Ø¼şÏà»ú
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½
 		uiCam = new OrthographicCamera();
-		// ÉèÖÃ¿Ø¼şÏà»úÊÓ¾à
+		// ï¿½ï¿½ï¿½Ã¿Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½
 		uiCam.setToOrtho(false, ViewPort_WIDTH, ViewPort_HEIGHT);
-		// ÊµÀı»¯Ö÷³¡¾°
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mainScreen = new MainScreen(this);
-		// ÊµÀı»¯ÓÎÏ·³¡¾°
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 		gameScreen = new GameScreen(this);
-		// ÖÃ¶¥ÓÎÏ·³¡¾°
+		// ï¿½Ã¶ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 		setScreen(mainScreen);
 	}
 

@@ -9,84 +9,85 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Array;
 
 public class Box2DContactListener implements ContactListener {
-	// ÉùÃ÷¼ÆÊıÆ÷
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int platformNum;
-	// Ö÷½ÇÊÇ·ñÅö×²»ğÑæÅö×²±äÁ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 	private boolean flameContact;
-	// ÒÆ³ı¸ÕÌåµÄÊı×é
+	// ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Array<Body> removeBodies;
 	
 	public Box2DContactListener() {
 		super();
-		removeBodies = new Array<Body>();		// ÊµÀı»¯ÒÆ³ı¸ÕÌåÊı×é
+		removeBodies = new Array<Body>();		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	}
 
 	@Override
 	public void beginContact(Contact contact) {
-		// »ñÈ¡Åö×²¸ÕÌå¼Ğ¾ßA
+		// ï¿½ï¿½È¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½A
 		Fixture fixtureA = contact.getFixtureA();
-		// »ñÈ¡Åö×²¸ÕÌå¼Ğ¾ßB
+		// ï¿½ï¿½È¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½B
 		Fixture fixtureB = contact.getFixtureB();
 
 		if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("foot")) {
-			// ¼ÆÊıÆ÷¼Ó1
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
 			platformNum++;
 		}
 		if (fixtureB.getUserData() != null && fixtureB.getUserData().equals("foot")) {
-			// ¼ÆÊıÆ÷¼Ó1
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
 			platformNum++;
 		}
 		
 		if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("heart")) {
-			// ÒÆ³ı¼Ğ¾ßAµÄ¸ÕÌå
+			// ï¿½Æ³ï¿½ï¿½Ğ¾ï¿½Aï¿½Ä¸ï¿½ï¿½ï¿½
 			removeBodies.add(fixtureA.getBody());
 		}
 
 		if (fixtureB.getUserData() != null && fixtureB.getUserData().equals("heart")) {
-			// ÒÆ³ı¼Ğ¾ßBµÄ¸ÕÌå
+			// ï¿½Æ³ï¿½ï¿½Ğ¾ï¿½Bï¿½Ä¸ï¿½ï¿½ï¿½
 			removeBodies.add(fixtureB.getBody());
 		}
 		if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("flame")) {
-			// Èç¹ûÖ÷½ÇÅö×²ÁË»ğÑæ£¬½«ÅĞ¶Ï±äÁ¿¸³ÖµÎªÕæ¡£
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Ë»ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½Ğ¶Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎªï¿½æ¡£
 			flameContact = true;
 		}
 		
 		if (fixtureB.getUserData() != null && fixtureB.getUserData().equals("flame")) {
-			// Èç¹ûÖ÷½ÇÅö×²ÁË»ğÑæ£¬½«ÅĞ¶Ï±äÁ¿¸³ÖµÎªÕæ¡£
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Ë»ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½Ğ¶Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎªï¿½æ¡£
 			flameContact = true;
 		}
 	}
 
 	public void endContact(Contact contact) {
-		// »ñÈ¡Åö×²¸ÕÌå¼Ğ¾ßA
+		// ï¿½ï¿½È¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½A
 		Fixture fixtureA = contact.getFixtureA();
-		// »ñÈ¡Åö×²¸ÕÌå¼Ğ¾ßB
+		// ï¿½ï¿½È¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½B
 		Fixture fixtureB = contact.getFixtureB();
-		// ¼Ğ¾ßÎª¿ÕÊ±£¬Åö×²Ö±½Ó·µ»Ø²»Ö´ĞĞ¡£
+		// ï¿½Ğ¾ï¿½Îªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½×²Ö±ï¿½Ó·ï¿½ï¿½Ø²ï¿½Ö´ï¿½Ğ¡ï¿½
 		if (fixtureA == null || fixtureB == null)
 			return;
 
 		if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("foot")) {
-			// ¼ÆÊıÆ÷¼õ1
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
 			platformNum--;
 		}
 		if (fixtureB.getUserData() != null && fixtureB.getUserData().equals("foot")) {
-			// ¼ÆÊıÆ÷¼õ1
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
 			platformNum--;
 		}
 	}
 
 	public boolean isOnPlatform() {
-		// ÅĞ¶Ï¸ÕÌåÊÇ·ñÔÚµØÃæÉÏ
+		// ï¿½Ğ¶Ï¸ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 		return platformNum > 0;
 	}
 	
-	// ÅĞ¶ÏÖ÷½Ç¸ÕÌåÊÇ·ñÅö×²µ½»ğÑæ
+	// ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean isContactFlame(){
 		return flameContact;
 	}
-	// ·µ»ØÎïÀíÊÀ½çÅö×²¼àÌıÆ÷ÖĞĞèÒªÒÆ³ıµÄ¸ÕÌå£¬¼´»æÖÆµÄĞÇĞÇ¸ÕÌå
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½Ä¸ï¿½ï¿½å£¬ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½
 	public Array<Body> getRemoveBodies() {
 		return removeBodies;
 	}

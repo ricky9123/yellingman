@@ -1,24 +1,19 @@
 package com.hit.hackgame.handle;
 
 public class Constant {
-	// ÎïÀíÊÀ½çÓëÓÎÏ·Ê±¼äµ¥Î»»»Ëã±ÈÀı¡£µ¥Î»£ºÏñËØ/Ã×
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·Ê±ï¿½äµ¥Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½
 	public static final float RATE = 100;
-	// Ö÷½Ç¸ÕÌåÅö×²ÊôĞÔ
+	// ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 	public static final short PLAYER = 4;
-	// ĞÇĞÇÅö×²ÊôĞÔ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 	public static final short STAR = 32;
-	// »ğÑæÅö×²ÊôĞÔ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 	public static final short ZHIZHANG = 64;
-
-
+	
 	public static final short FLOOR = 4;
 
-	// ºìÉ«Í¼¿éÅö×²ÊôĞÔ
-	public static final short BLOCK_RED = 4;
-	// ÂÌÉ«Í¼¿éÅö×²ÊôĞÔ
-	public static final short BLOCK_GREEN = 8;
-	// À¶É«Í¼¿éÅö×²ÊôĞÔ
-	public static final short BLOCK_BLUE = 16;
+	public static final short ZHANG = 4;
 
-	public static final float SPEED = 1f;
+
+	public static final float SPEED = 1.2f;
 }

@@ -25,261 +25,262 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.hit.hackgame.handle.Box2DContactListener;
+import com.hit.hackgame.handle.YellingRobot;
 import com.hit.hackgame.main.Yelling;
-import com.hit.hackgame.sprite.ZhiZhang;
+import com.hit.hackgame.sprite.GameBack;
 import com.hit.hackgame.sprite.Protagonist;
 import com.hit.hackgame.sprite.Star;
-import com.hit.hackgame.sprite.Tree;
+import com.hit.hackgame.sprite.ZhiZhang;
 
 import static com.hit.hackgame.handle.Constant.FLOOR;
-import static com.hit.hackgame.handle.Constant.ZHIZHANG;
 import static com.hit.hackgame.handle.Constant.PLAYER;
 import static com.hit.hackgame.handle.Constant.RATE;
 import static com.hit.hackgame.handle.Constant.SPEED;
 import static com.hit.hackgame.handle.Constant.STAR;
+import static com.hit.hackgame.handle.Constant.ZHIZHANG;
 import static com.hit.hackgame.main.Yelling.ViewPort_HEIGHT;
 import static com.hit.hackgame.main.Yelling.ViewPort_WIDTH;
 import static com.hit.hackgame.main.Yelling.assetManager;
 
 public class GameScreen extends YellScreen {
-	// ÎïÀíÊ±¼ääÖÈ¾±äÁ¿
+	// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 	private boolean Box2DDebug = true;
-	// ÉùÃ÷ÊÀ½ç±äÁ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private World world;
-	// ÉùÃ÷ÎïÀíÊÀ½çäÖÈ¾Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
 	private Box2DDebugRenderer box2dRender;
-	// ÉùÃ÷ÎïÀíÊÀ½çäÖÈ¾Ïà»ú
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½
 	private OrthographicCamera box2dCamera;
-	// ÉùÃ÷¸ÕÌå¼àÌıÆ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Box2DContactListener bcl;
-	// ¸ÕÌå
+	// ï¿½ï¿½ï¿½ï¿½
 	Body body;
-	// ÉùÃ÷µØÍ¼
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	private TiledMap tileMap;
-	// ÉùÃ÷ÍßÆ¬´óĞ¡
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½Ğ¡
 	private float tileSize;
-	// ÉùÃ÷µØÍ¼¿í¶È
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½
 	private float mapWidth;
-	// ÉùÃ÷µØÍ¼¸ß¶È
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ß¶ï¿½
 	private float mapHeight;
-	// ÉùÃ÷µØÍ¼äÖÈ¾Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½È¾ï¿½ï¿½
 	private OrthogonalTiledMapRenderer mapRender;
-	// µØÍ¼±àºÅ
+	// ï¿½ï¿½Í¼ï¿½ï¿½ï¿½
 	public static int level;
-	// ÉùÃ÷Ö÷½Ç
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Protagonist protagonist;
-	// ¶¯»­äÖÈ¾×´Ì¬Ê±¼ä
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾×´Ì¬Ê±ï¿½ï¿½
 	private float statetime;
-	// ÉùÃ÷ĞÇĞÇÊı×é
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Array<Star> stars;
-	// ´´½¨»ğÑæÊı×é
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Array<ZhiZhang> zaw;
 
-	// ÉùÃ÷±³¾°
-	private Tree tree;
+	private YellingRobot robot;
+
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private GameBack gameBack;
 
 	public GameScreen(Yelling game) {
 		super(game);
-		// ÊµÀı»¯ÎïÀíÊÀ½ç¸ÕÌå¼àÌıÆ÷
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bcl = new Box2DContactListener();
-		// ÊµÀı»¯ÎïÀíÊÀ½ç
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		world = new World(new Vector2(0, -9.81f), true);
-		// ÉèÖÃÎïÀíÊÀ½ç¸ÕÌå¼àÌıÆ÷
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		world.setContactListener(bcl);
-		// ÊµÀı»¯ÎïÀíÒıÇæäÖÈ¾Æ÷
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
 		box2dRender = new Box2DDebugRenderer();
-		// ÊµÀı»¯ÎïÀíÊÀ½çÏà»ú
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		box2dCamera = new OrthographicCamera();
-		// ÉèÖÃÏà»úÊÓ¾à
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½
 		box2dCamera.setToOrtho(false, ViewPort_WIDTH / RATE, ViewPort_HEIGHT / RATE);
-		// ³õÊ¼»¯ÓÎÏ·¾«ÁéµÈ
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½
 		this.init();
 	}
 
 	public void init() {
-		// ´´½¨Ö÷½Ç
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		createActor();
-		// ´´½¨µØÍ¼
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 		createMap();
-		// ´´½¨ĞÇĞÇ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		createStar();
-		// ´´½¨ÕÏ°­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 		createZhiZhang();
-		//ÊµÀı»¯±³¾°
-		tree = new Tree();
+		//Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		gameBack = new GameBack();
+
+
 	}
 	
 	private void createZhiZhang() {
-		// ÊµÀı»¯ÕÏ°­¶ÔÏóÊı×é
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		zaw = new Array<ZhiZhang>();
-		// ±éÀúÕÏ°­¶ÔÏó²ã
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		MapLayer ml = tileMap.getLayers().get("zhizhang");
-		// ¶ÔÏó²ãÎª¿Õ¼´·µ»Ø
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(ml == null) return;
-		// ¶¨Òå¸ÕÌåÑùÊ½
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 		BodyDef bodyDef = new BodyDef();
-		// ¶¨Òå¸ÕÌåÀàĞÍ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bodyDef.type = BodyType.StaticBody;
-		// ÊµÀı»¯Ô²ĞÎÍ¼ĞÎ
+		// Êµï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½Í¼ï¿½ï¿½
 		CircleShape shape = new CircleShape();
-		// ÉèÖÃÔ²ĞÎÍ¼ĞÎ°ë¾¶
+		// ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½Í¼ï¿½Î°ë¾¶
 		shape.setRadius(5 / RATE);
-		// ÊµÀı»¯¼Ğ¾ß
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½
 		FixtureDef fixtureDef = new FixtureDef();
-		// °ó¶¨Í¼ĞÎÓë¸ÕÌå
+		// ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.shape = shape;
-		// ÉèÖÃ¸ÕÌåÎª´«¸ĞÆ÷
+		// ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.isSensor = true;
-		// Éè¶¨¸ÕÌå×ÔÉíÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.categoryBits = ZHIZHANG;
-		// Éè¶¨¸ÕÌåÄ¿±êÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.maskBits = PLAYER;
-		// ±éÀúÕÏ°­¶ÔÏó²ã
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for(MapObject mo : ml.getObjects()) {
-			// ¶ÔÏóx,yÖá×ø±ê
+			// ï¿½ï¿½ï¿½ï¿½x,yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			float x = 0;
 			float y = 0;
-			// ±éÀúÍ¼²ã¶ÔÏó
+			// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(mo instanceof EllipseMapObject) {
 				EllipseMapObject emo = (EllipseMapObject) mo;
-				// ¸³ÖµÕÏ°­¶ÔÏóx£¬y×ø±ê
+				// ï¿½ï¿½Öµï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
 				x = emo.getEllipse().x / RATE;
 				y = emo.getEllipse().y / RATE;
 			}
-			// Éè¶¨¸ÕÌåÎ»ÖÃ
+			// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 			bodyDef.position.set(x, y);
-			// ÊµÀı»¯¸ÕÌå
+			// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Body body = world.createBody(bodyDef);
-			// ÊµÀı»¯¼Ğ¾ß²¢ÇÒÉè¶¨¼Ğ¾ßÓÃ»§Êı¾İ
+			// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ß²ï¿½ï¿½ï¿½ï¿½è¶¨ï¿½Ğ¾ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 			body.createFixture(fixtureDef).setUserData("flame");
-			// ÊµÀı»¯ÕÏ°­¶ÔÏó
+			// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½
 			ZhiZhang f = new ZhiZhang(body);
-			// Éè¶¨¸ÕÌåÓÃ»§Êı¾İ
+			// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 			body.setUserData(f);
-			// Ìí¼ÓÕÏ°­¶ÔÏóµ½ÕÏ°­Êı×é
+			// ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½
 			zaw.add(f);
 		}
 		shape.dispose();
 	}
 	
 	private void createActor() {
-		// ¶¨Òå¸ÕÌåÑùÊ½¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
 		BodyDef bodyDef = new BodyDef();
-		// ´´½¨¼Ğ¾ß
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½
 		FixtureDef fixtureDef = new FixtureDef();
-		// ÊµÀı»¯¶à±ßĞÎ
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PolygonShape shape = new PolygonShape();
-		// ´´½¨¸ÕÌå
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		body = world.createBody(bodyDef);
 		/*
-		 * ´´½¨Õı·½ĞÎÄ£ĞÍ
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 		 */
-		// ¶¨ÒåÎ»ÖÃ
-		bodyDef.position.set(60 / RATE, 200 / RATE);
-		// ¶¨Òå¸ÕÌåÀàĞÍ
+		// ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+		bodyDef.position.set(60 / RATE, 200 / RATE + 7 );
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bodyDef.type = BodyType.DynamicBody;
-		// Éè¶¨Ë®Æ½·½ÏòËÙ¶È
+		// ï¿½è¶¨Ë®Æ½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 		bodyDef.linearVelocity.set(SPEED , 0);
 
-		// ´´½¨¸ÕÌå
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		body = world.createBody(bodyDef);
-		// Éè¶¨¸ÕÌåĞÎ×´
-		shape.setAsBox(13 / RATE, 18 / RATE);
-		// °ó¶¨Õı·½Ìå¼Ğ¾ßÓë¸ÕÌå
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´
+		shape.setAsBox(15 / RATE, 25 / RATE);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.shape = shape;
-		// Éè¶¨Õı·½ĞÎ×ÔÉíÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.categoryBits = PLAYER;
-		// Éè¶¨Õı·½ĞÎÄ¿±êÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.maskBits = FLOOR | STAR | ZHIZHANG;
-		// ´´½¨¼Ğ¾ß
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½
 		body.createFixture(fixtureDef).setUserData("box");
 		/*
-		 * ´´½¨´«¸ĞÆ÷foot
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½foot
 		 */
-		// ÉèÖÃ´«¸ĞÆ÷ĞÎ×´
-		shape.setAsBox(13 / RATE, 2 / RATE, new Vector2(0, -18 / RATE), 0);
-		// ´«¸ĞÆ÷¼Ğ¾ßÓëÍ¼ĞÎ°ó¶¨
+		// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´
+		shape.setAsBox(15 / RATE, 5 / RATE, new Vector2(0, -25 / RATE), 0);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½ï¿½ï¿½Í¼ï¿½Î°ï¿½
 		fixtureDef.shape = shape;
-		// ÉèÖÃ´«¸ĞÆ÷×ÔÉíÅö×²ÊôĞÔ
+		// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.categoryBits = PLAYER;
-		// ÉèÖÃ´«¸ĞÆ÷Ä¿±êÅö×²ÊôĞÔ
+		// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.maskBits = FLOOR;
-		// Éè¶¨¸Ã¸ÕÌåÊÇ·ñ×÷Îª´«¸ĞÆ÷
+		// ï¿½è¶¨ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.isSensor = true;
-		// °ó¶¨¸ÕÌå¼°¼Ğ¾ß²¢ÇÒÉèÖÃÓÃ»§Êı¾İ
+		// ï¿½ó¶¨¸ï¿½ï¿½å¼°ï¿½Ğ¾ß²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 		body.createFixture(fixtureDef).setUserData("foot");
-		// ÊµÀı»¯Ö÷½Ç
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		protagonist = new Protagonist(body);
 	}
 	
 	private void createMap() {
-		// ¼ÓÔØµØÍ¼
-		try {
-			// ÊµÀı»¯µØÍ¼
-			tileMap = new TmxMapLoader().load("maps/" + "level" + level
-					+ ".tmx");
-		} catch (Exception e) {
-			// Òì³£´òÓ¡ĞÅÏ¢
-			System.out.println("²»ÄÜÕÒµ½level" + level + ".tmxÎÄ¼ş");
-			// ÍË³öÓ¦ÓÃ
-			Gdx.app.exit();
-		}
-		// ÊµÀı»¯µØÍ¼äÖÈ¾Æ÷
+		// åŠ è½½åœ°å›¾
+
+			// å®ä¾‹åŒ–åœ°å›¾
+			tileMap = new TmxMapLoader().load("maps/" + "level" + level	+ ".tmx");
+
+		// å®ä¾‹åŒ–åœ°å›¾æ¸²æŸ“å™¨
 		mapRender = new OrthogonalTiledMapRenderer(tileMap);
-		// ¸³ÖµµØÍ¼ÍßÆ¬´óĞ¡
+		// èµ‹å€¼åœ°å›¾ç“¦ç‰‡å¤§å°
 		tileSize = tileMap.getProperties().get("tilewidth", Integer.class);
-		// ¸³ÖµµØÍ¼¿í¶È
+		// èµ‹å€¼åœ°å›¾å®½åº¦
 		mapWidth = tileMap.getProperties().get("width", Integer.class);
-		// ¸³ÖµµØÍ¼¸ß¶È
+		// èµ‹å€¼åœ°å›¾é«˜åº¦
 		mapHeight = tileMap.getProperties().get("height", Integer.class);
-		// ÉùÃ÷Í¼²ã
+		// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 		TiledMapTileLayer layer;
-		// »ñÈ¡µØ°åÍ¼²ã
+		// ï¿½ï¿½È¡ï¿½Ø°ï¿½Í¼ï¿½ï¿½
 		layer = (TiledMapTileLayer) tileMap.getLayers().get("floor");
-		// °ó¶¨¸ÕÌåÓëµØ°åÍ¼²ã
+		// ï¿½ó¶¨¸ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½Í¼ï¿½ï¿½
 		createMapLayer(layer, FLOOR);
+
 		
 	}
 	private void createMapLayer(TiledMapTileLayer layer, short bits){
-		// ÊµÀı»¯¸ÕÌåÑùÊ½¶¨ÒåÀà
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		BodyDef bodyDef = new BodyDef();
-		// ÊµÀı»¯¼Ğ¾ßÑùÊ½¶¨ÒåÀà
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FixtureDef fixtureDef = new FixtureDef();
-		// ±éÀúËùÓĞµ¥Ôª¸ñ,rowÁĞ£¬colĞĞ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ôªï¿½ï¿½,rowï¿½Ğ£ï¿½colï¿½ï¿½
 		for (int row = 0; row < layer.getHeight(); row++) {
 			for (int col = 0; col < layer.getWidth(); col++) {
 
-				// »ñÈ¡cell
+				// ï¿½ï¿½È¡cell
 				Cell cell = layer.getCell(col, row);
 				if (cell == null)
 					continue;
 				if (cell.getTile() == null)
 					continue;
 
-				// ´´½¨body ¼°¼Ğ¾ß£¬
+				// ï¿½ï¿½ï¿½ï¿½body ï¿½ï¿½ï¿½Ğ¾ß£ï¿½
 				bodyDef.type = BodyType.StaticBody;
 				bodyDef.position.set(
-						(col + 0.5f) * tileSize / RATE, 
-						(row + 0.5f) * tileSize / RATE);
+						(col + 1f) * tileSize / RATE,
+						(row + 1f) * tileSize / RATE);
 				ChainShape cs = new ChainShape();
-				//´´½¨Á´Ê½Í¼ĞÎ£¬²¢ÇÒ´¦Àí¸ÕÌåÓëµØÍ¼µÄ×ø±ê
+//				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Í¼ï¿½Î£ï¿½ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				Vector2[] v = new Vector2[3];
-				v[0] = new Vector2(-tileSize / 2 / RATE,-tileSize / 2 / RATE);
-				v[1] = new Vector2(-tileSize / 2 / RATE,  tileSize / 2 / RATE );
-				v[2] = new Vector2(tileSize/ 2 / RATE,  tileSize / 2 / RATE);
-				// ´´½¨Á´Ê½Í¼ĞÎ
+				v[0] = new Vector2(-tileSize / 32 / RATE,-tileSize / 32 / RATE);
+				v[1] = new Vector2(-tileSize / 32 / RATE,  tileSize / 32 / RATE );
+				v[2] = new Vector2(tileSize/ 32 / RATE,  tileSize / 32 / RATE);
+//				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Í¼ï¿½ï¿½
 				cs.createChain(v);
-				// ÉèÖÃ»Ö¸´Á¦Îª0
+				// ï¿½ï¿½ï¿½Ã»Ö¸ï¿½ï¿½ï¿½Îª0
 				fixtureDef.friction = 0;
-				// °ó¶¨¼Ğ¾ßÓëÁ´Ê½Í¼ĞÎ
+				// ï¿½ó¶¨¼Ğ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Í¼ï¿½ï¿½
 				fixtureDef.shape = cs;
-				// ÉèÖÃÍ¼ĞÎµÄ¹ıÂËÆ÷ÊôĞÔ
+				// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ÎµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				fixtureDef.filter.categoryBits = bits;
-				// Éè¶¨µØÍ¼Ä¬ÈÏÅö×²ÊôĞÔ
+				// ï¿½è¶¨ï¿½ï¿½Í¼Ä¬ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 				fixtureDef.filter.maskBits = PLAYER;
-				// ÉèÖÃ´«¸ĞÆ÷
+				// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½
 				fixtureDef.isSensor = false;
-				// ´´½¨µØÍ¼¸ÕÌå
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 				world.createBody(bodyDef).createFixture(fixtureDef);
 			}
 		}
@@ -287,64 +288,64 @@ public class GameScreen extends YellScreen {
 
 	private void createStar(){
 		
-		// ´´½¨½±ÀøµÄÊı×é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		stars = new Array<Star>();
-		// »ñÈ¡¶ÔÏó²ã
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½
 		MapLayer ml = tileMap.getLayers().get("heart");
-		// ¶ÔÏó²ãÎª¿Õ£¬Ö±½Ó·µ»Ø
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
 		if(ml == null) return;
-		// ÊµÀı»¯ĞÇĞÇ¸ÕÌå¶¨Òå
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½å¶¨ï¿½ï¿½
 		BodyDef bodyDef = new BodyDef();
-		// Éè¶¨¸ÕÌåÀàĞÍ
+		// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bodyDef.type = BodyType.StaticBody;
-		// ÊµÀı»¯¼Ğ¾ß
+		// Êµï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½
 		FixtureDef fixtureDef = new FixtureDef();
-		// ÊµÀı»¯Ô²ĞÎÍ¼ĞÎ¶ÔÏó
+		// Êµï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½Í¼ï¿½Î¶ï¿½ï¿½ï¿½
 		CircleShape shape = new CircleShape();
-		// ÉèÖÃÔ²ĞÎ¸ÕÌå°ë¾¶
+		// ï¿½ï¿½ï¿½ï¿½Ô²ï¿½Î¸ï¿½ï¿½ï¿½ë¾¶
 		shape.setRadius(8 / RATE);
-		// Í¼ĞÎ¸ÕÌå°ó¶¨¼Ğ¾ß
+		// Í¼ï¿½Î¸ï¿½ï¿½ï¿½ó¶¨¼Ğ¾ï¿½
 		fixtureDef.shape = shape;
-		// Éè¶¨µ±Ç°¸ÕÌåÎª´«¸ĞÆ÷
+		// ï¿½è¶¨ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.isSensor = true;
-		// Éè¶¨µ±Ç°¸ÕÌå±¾ÉíÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½Ç°ï¿½ï¿½ï¿½å±¾ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.categoryBits = STAR;
-		// Éè¶¨µ±Ç°¸ÕÌåÄ¿±êÅö×²ÊôĞÔ
+		// ï¿½è¶¨ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 		fixtureDef.filter.maskBits = PLAYER;
-		// ±éÀú¶ÔÏó²ãÖĞ¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½
 		for (MapObject mo: ml.getObjects()) {
-			// ĞÇĞÇ¶ÔÏóXÖá×ø±ê
+			// ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			float x = 0;
-			// ĞÇĞÇ¶ÔÏóYÖá×ø±ê
+			// ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			float y = 0;
-			// »ñÈ¡¶ÔÏóx,y×ø±ê
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½x,yï¿½ï¿½ï¿½ï¿½
 			if (mo instanceof EllipseMapObject) {
 				EllipseMapObject emo = (EllipseMapObject) mo;
 				x = emo.getEllipse().x / RATE;
 				y = emo.getEllipse().y / RATE;
 			}
-			// Éè¶¨¸ÕÌåÎ»ÖÃ
+			// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 			bodyDef.position.set(x, y);
-			// ÊµÀı»¯ĞÇĞÇ¸ÕÌå
+			// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½
 			Body body = world.createBody(bodyDef);
-			// ´´½¨¼Ğ¾ß
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¾ï¿½
 			body.createFixture(fixtureDef).setUserData("heart");
-			// ÊµÀı»¯ĞÇĞÇ
+			// Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Star s = new Star(body);
-			// Ìí¼ÓĞÇĞÇµ½µ±Ç°Êı×é
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 			stars.add(s);
-			// Éè¶¨ĞÇĞÇÓÃ»§Êı¾İ
+			// ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 			body.setUserData(s);
 		}
 	}
 	
 	@Override
 	public void update(float dt) {
-		// ´¦ÀíÊäÈë¼àÌı
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		handleInput();
-		// ÇåÆÁ
+		// ï¿½ï¿½ï¿½ï¿½
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		// ¸üĞÂÎïÀíÊÀ½ç×´Ì¬
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 		world.step(dt, 6, 2);
 		
 		Array<Body> bodies = bcl.getRemoveBodies();
@@ -353,59 +354,56 @@ public class GameScreen extends YellScreen {
 			stars.removeValue((Star) b.getUserData(), true);
 			world.destroyBody(b);
 			protagonist.collectStars();
-			// ²¥·Å³Ôµô½ğ±ÒÉùÒô
-			Sound s = assetManager.get("audio/diamond.ogg");
-			s.play();
 		}
 		bodies.clear();
 		
-		//ÅĞ¶ÏÖ÷½Ç¹ı¹Ø
+		//ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½
 		if (protagonist.getBody().getPosition().x * RATE > mapWidth * tileSize) {
-			// ²¥·Å¹Ø¿¨Ñ¡ÔñÒôĞ§
+			// åœ°å›¾å£°éŸ³
 			Sound s = assetManager.get("audio/select.wav");
 			s.play();
-			// Ö÷½ÇÍ¨¹Ø³õÊ¼»¯¿ªÊ¼½çÃæËùÓĞÔªËØ
+			// ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ø³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 			game.mainScreen.init();
-			// ÉèÖÃÖ÷½çÃæ»æÖÆ±äÁ¿Îª¼Ù£¬²»»æÖÆ¿ªÊ¼½çÃæ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Îªï¿½Ù£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 			MainScreen.Debug = false;
-			// ÖÃ¶¥µ±Ç°ÓÎÏ·Ö÷½çÃæ
+			// ï¿½Ã¶ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			game.setScreen(Yelling.mainScreen);
 		}
 		
 		if(protagonist.getBody().getPosition().y < 0){
-			// ²¥·ÅÅö×²µôÂäÒôĞ§
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 			Sound s = assetManager.get("audio/contact.wav");
 			s.play();
-			// µ±Ö÷½ÇµôÂäµØÍ¼Íâ£¬³õÊ¼»¯¿ªÊ¼½çÃæËùÓĞÔªËØ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½Í¼ï¿½â£¬ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 			game.mainScreen.init();
-			// ÉèÖÃÖ÷½çÃæ»æÖÆ±äÁ¿ÎªÕæ£¬»æÖÆ¿ªÊ¼½çÃæ
-			game.mainScreen.Debug = true;
-			// ÖÃ¶¥µ±Ç°ÓÎÏ·Ö÷½çÃæ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Îªï¿½æ£¬ï¿½ï¿½ï¿½Æ¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+			game.mainScreen.Debug = false;
+			// ï¿½Ã¶ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			game.setScreen(game.mainScreen);
 		}
 		if(protagonist.getBody().getLinearVelocity().x < 0.001f){
-			// ²¥·ÅÅö×²ÕÏ°­ÒôĞ§
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Ï°ï¿½ï¿½ï¿½Ğ§
 			Sound s = assetManager.get("audio/contact.wav");
 			s.play();
-			// µ±Ö÷½ÇÅö×²µ½Ä¾°å£¬ºáÏòËÙ¶ÈÎª0Ê±£¬ÅĞ¶ÏÖ÷½ÇËÀÍö£¬³õÊ¼»¯ÓÎÏ·Ö÷½çÃæÔªËØ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ä¾ï¿½å£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½Îª0Ê±ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 			game.mainScreen.init();
-			// ÉèÖÃÖ÷½çÃæ»æÖÆ±äÁ¿ÎªÕæ£¬»æÖÆÓÎÏ·¿ªÊ¼½çÃæ
-			game.mainScreen.Debug = true;
-			// ³õÊ¼»¯µ±Ç°ÓÎÏ·½çÃæËùÓĞ×ÊÔ´
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Îªï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+			game.mainScreen.Debug = false;
+			// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 			this.init();
-			// Ö¸¶¨µ±Ç°ÓÎÏ·Ö÷½çÃæ
+			// Ö¸ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			game.setScreen(game.mainScreen);
 		}
 		
 		if(bcl.isContactFlame()){
-			// ²¥·ÅÅö×²µØ°åÒôĞ§
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Ø°ï¿½ï¿½ï¿½Ğ§
 			Sound s = assetManager.get("audio/contact.wav");
 			s.play();
-			// Ö÷½ÇÅöµ½ÕÏ°­£¬Ö÷½ÇËÀÍö£¬³õÊ¼»¯Ö÷½çÃæËùÓĞ×ÊÔ´
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 			game.mainScreen.init();
-			// ÉèÖÃÓÎÏ·Ö÷½çÃæ»æÖÆ±äÁ¿ÎªÕæ£¬»æÖÆÓÎÏ·Ö÷½çÃæ
-			game.mainScreen.Debug = true;
-			//¡¡ÖÃ¶¥µ±Ç°ÓÎÏ·Ö÷½çÃæ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Îªï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			game.mainScreen.Debug = false;
+			//ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			game.setScreen(Yelling.mainScreen);
 		}
 	}
@@ -416,7 +414,7 @@ public class GameScreen extends YellScreen {
 		if (Gdx.input.isKeyJustPressed(Keys.Z)
 				|| (Gdx.input.justTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() / 2)) {
 			if(bcl.isOnPlatform()){
-				protagonist.getBody().applyForceToCenter(0, 250, true);
+				protagonist.getBody().applyForceToCenter(10, 260, true);
 			}
 		}
 
@@ -424,11 +422,11 @@ public class GameScreen extends YellScreen {
 	}
 	
 	private void adjustCamera() {
-		// Ïà»úÍ¶Ó°ÃªµãĞ¡ÓÚÏà»úÊÓ¾àµÄÒ»°ëÊ±£¬²»ÔÙÏò×óÒÆ¶¯Ïà»ú
+		// ï¿½ï¿½ï¿½Í¶Ó°Ãªï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
 		if (camera.position.x < camera.viewportWidth / 2) {
 			camera.position.x = camera.viewportWidth / 2;
 		}
-		// µ±Ïà»úÃªµãXÖá×ø±ê´óÓÚµØÍ¼¿í¶ÈÊ±£¬²»ÔÙÏòÓÒÒÆ¶¯Ïà»ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ãªï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Í¼ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
 		if (camera.position.x > (tileMap.getProperties().get("width",Integer.class) * tileSize)
 				- camera.viewportWidth / 2) {
 			camera.position.x = (tileMap.getProperties().get("width",Integer.class) * tileSize)
@@ -437,11 +435,11 @@ public class GameScreen extends YellScreen {
 	}
 
 	private void adjustBox2DCamera() {
-		// µ±ÎïÀíÊ±¼äÏà»úÃªµãXÖá×ø±êĞ¡ÓÚÏà»úÊÓ¾à¿í¶ÈµÄÒ»°ëÊ±£¬²»Ïò×óÒÆ¶¯Ïà»ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ãªï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½Èµï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
 		if (box2dCamera.position.x < box2dCamera.viewportWidth / 2) {
 			box2dCamera.position.x = box2dCamera.viewportWidth / 2;
 		}
-		// µ±ÎïÀíÊ±¼äÏà»úÃªµãXÖá×ø±ê´óÓÚÎïÀíÊÀ½ç¿í¶ÈÊ±£¬²»ÏòÓÒÒÆ¶¯Ïà»ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ãªï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
 		if (box2dCamera.position.x > (tileMap.getProperties().get("width",Integer.class)
 				/ RATE * tileSize) - box2dCamera.viewportWidth / 2) {
 			box2dCamera.position.x = (tileMap.getProperties().get("width",Integer.class)
@@ -452,52 +450,55 @@ public class GameScreen extends YellScreen {
 
 	@Override
 	public void render(float delta) {
-		// ¸üĞÂÓÎÏ·Âß¼­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ß¼ï¿½
 		update(delta);
-		// ÉèÖÃÏà»úÍ¶Ó°¾ØÕóÃªµãÎ»ÖÃ
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶Ó°ï¿½ï¿½ï¿½ï¿½Ãªï¿½ï¿½Î»ï¿½ï¿½
 		camera.position.set(protagonist.getPosition().x * RATE + ViewPort_WIDTH
 				/ 4, ViewPort_HEIGHT / 2, 0);
-		// µ÷Õû¾«Áé»æÖÆÏà»ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		adjustCamera();
-		// ¸üĞÂÏà»ú×´Ì¬
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 		camera.update();
-		// ÉèÖÃ»æÖÆ±³¾°µÄÏà»úÎªUIÏà»ú
+		// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªUIï¿½ï¿½ï¿½
 		batch.setProjectionMatrix(uiCam.combined);
-		// »æÖÆ±³¾°
-		tree.render(batch);
-		//äÖÈ¾Ê±¼ä
+		// ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½
+		gameBack.render(batch);
+		//ï¿½ï¿½È¾Ê±ï¿½ï¿½
 		statetime +=delta;
-		// ÉèÖÃ¾«Áé»­±Ê»æÍ¼¾ØÕó
+		// ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½é»­ï¿½Ê»ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 		batch.setProjectionMatrix(camera.combined);
-		// äÖÈ¾Ö÷½Ç
+		// ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 		protagonist.render(batch, statetime);
-		// äÖÈ¾ĞÇĞÇ
+		// ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < stars.size; i++) {
-			// »ñÈ¡Êı×éÖĞÃ¿¸öĞÇĞÇ²¢ÇÒ»æÖÆ
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
 			stars.get(i).render(batch, statetime);
 		}
-		// äÖÈ¾ÕÏ°­
+		// ï¿½ï¿½È¾ï¿½Ï°ï¿½
 		for (int i = 0; i < zaw.size; i++) {
-			// »ñÈ¡Êı×éÖĞÃ¿¸öÕÏ°­¶ÔÏó£¬²¢ÇÒ»æÖÆ
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
 			zaw.get(i).render(batch, statetime);
 		}
-		// ÉèÖÃ¾«Áé»­±Ê»æÖÆ¾ØÕó
+		// ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½é»­ï¿½Ê»ï¿½ï¿½Æ¾ï¿½ï¿½ï¿½
 		batch.setProjectionMatrix(uiCam.combined);
 
-		// ÉèÖÃµØÍ¼äÖÈ¾Ïà»ú
+		// ï¿½ï¿½ï¿½Ãµï¿½Í¼ï¿½ï¿½È¾ï¿½ï¿½ï¿½
 		mapRender.setView(camera);
-		// äÖÈ¾µØÍ¼
+		// ï¿½ï¿½È¾ï¿½ï¿½Í¼
 		mapRender.render();
 		if (Box2DDebug) {
-			// ÉèÖÃBox2DÏà»úÍ¶Ó°µÄÃªµã
+			// ï¿½ï¿½ï¿½ï¿½Box2Dï¿½ï¿½ï¿½Í¶Ó°ï¿½ï¿½Ãªï¿½ï¿½
 			box2dCamera.position.set(protagonist.getPosition().x
 					+ ViewPort_WIDTH / 4 / RATE, ViewPort_HEIGHT / 2 / RATE, 0);
-			// µ÷ÕûBox2DÏà»ú
+			// ï¿½ï¿½ï¿½ï¿½Box2Dï¿½ï¿½ï¿½
 			adjustBox2DCamera();
-			// ¸üĞÂÎïÀíÊ±¼ääÖÈ¾Ïà»ú×´Ì¬
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½×´Ì¬
 			box2dCamera.update();
-			// äÖÈ¾ÎïÀíÊÀ½ç
+			// ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			box2dRender.render(world, box2dCamera.combined);
+
+
 		}
 	}
 }

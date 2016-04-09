@@ -1,50 +1,65 @@
 package com.hit.hackgame.sprite;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.hit.hackgame.main.Yelling;
 
 public class Protagonist extends GameSprite {
-	// ÉùÃ÷ÐÇÐÇÊýÄ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 	private int starsCoumt;
-	// ÉùÃ÷ÐÇÐÇ×ÜÊý
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int allStarsCoumt;
-	// Å®º¢ÎÆÀí
+	// Å®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Texture tex;
+
+	private TextureAtlas texat;
 
 	public Protagonist(Body body) {
 		super(body);
-		// ÎÆÀí³õÊ¼»¯
-		tex = Yelling.assetManager.get("images/girl.png", Texture.class);
-		// ³õÊ¼»¯ÎÆÀíÊý×é
-		TextureRegion[] region = TextureRegion.split(tex, 48, 48)[0];
-		// ³õÊ¼»¯Ö÷½Ç¶¯»­
-		setAnimation(region, 1 / 12f);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+		tex = Yelling.assetManager.get("images/yellingman.png", Texture.class);
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		TextureRegion[] region = new TextureRegion[5];
+
+		TextureRegion[][] spilt = TextureRegion.split(tex,60,60);
+
+		for (int i = 0 ; i < 5 ; i ++){
+			region[i] = spilt[i][0];
+		}
+
+//		texat = assetManager.get("images/yellingman2.atlas");
+//		TextureRegion[] region = new TextureRegion[5];
+//		for (int i = 0 ; i < 5 ; i++){
+//			region[i++] = texat.findRegion(""+i);
+//		}
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½
+		setAnimation(region, 1 / 18f);
 
 	}
 
-	// ÊÕ¼¯ÐÇÐÇ
+	// ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void collectStars() {
 		starsCoumt++;
 	}
 
-	// ·µ»ØÊÕ¼¯ÐÇÐÇÊýÄ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 	public int getStarsCoumt() {
 		return starsCoumt;
 	}
 
-	// »ñÈ¡ËùÓÐÐÇÐÇ
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getAllStarsCoumt() {
 		return allStarsCoumt;
 	}
 
-	// ÉèÖÃÐÇÐÇÊýÄ¿
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 	public void setStarsCoumt(int starsCoumt) {
 		this.starsCoumt = starsCoumt;
 	}
 
-	// ·µ»ØËùÓÐÐÇÐÇ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void setAllStarsCoumt(int allStarsCoumt) {
 		this.allStarsCoumt = allStarsCoumt;
 	}

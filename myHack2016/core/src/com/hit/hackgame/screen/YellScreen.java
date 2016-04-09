@@ -8,17 +8,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hit.hackgame.main.Yelling;
 
 public abstract class YellScreen implements Screen {
-	// 声明精灵画笔
+	// 绮剧伒鐢荤瑪
 	protected SpriteBatch batch;
-	// 声明精灵相机
+	// 鐩告満
 	protected OrthographicCamera camera;
-	// 声明控件相机
 	protected OrthographicCamera uiCam;
-	// 声明游戏管理器对象
+	//Yelling
 	Yelling game;
 
 	public YellScreen(Yelling game) {
-		// 管理器赋值
+		// 锟斤拷锟斤拷锟斤拷锟斤拷值
 		this.game = game;
 	}
 

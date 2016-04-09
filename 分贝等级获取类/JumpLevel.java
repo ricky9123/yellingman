@@ -35,13 +35,20 @@ public class JumpLevel {
                     ac.getNoiseLevel();
                     Log.i(TAG, String.valueOf(ac.getVolume()));
 
-                    if (ac.getVolume() < 45) {
+                    if (ac.getVolume() < 65) {
 
                         level = 0;
 
-                    } else {
+                    } else if (ac.getVolume() >= 65 && ac.getVolume() < 75){
 
                         level = 1;
+
+                    }else if(ac.getVolume() >= 75 && ac.getVolume() < 99){
+
+                        level = 2;
+                    }else{
+
+                        level = 3;
 
                     }
 

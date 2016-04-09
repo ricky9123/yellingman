@@ -13,7 +13,8 @@ class User(db.Model):
 class Music(db.Model):
     __tablename__ = 'musics'
     id = db.Column(db.SmallInteger, primary_key=True)
-    name = db.Column(db.Unicode(8), nullable=False)
+    name = db.Column(db.Unicode(8))
+    singer = db.Column(db.Unicode(8))
 
     def __repr__(self):
         pass

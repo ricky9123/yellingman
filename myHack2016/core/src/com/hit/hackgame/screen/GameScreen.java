@@ -1,7 +1,6 @@
 package com.hit.hackgame.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -411,10 +410,29 @@ public class GameScreen extends YellScreen {
 	@Override
 	public void handleInput() {
 
-		if (Gdx.input.isKeyJustPressed(Keys.Z)
+		/*if (Gdx.input.isKeyJustPressed(Keys.Z)
 				|| (Gdx.input.justTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() / 2)) {
 			if(bcl.isOnPlatform()){
 				protagonist.getBody().applyForceToCenter(10, 260, true);
+			}
+		} */
+
+		if (bcl.isOnPlatform()) {
+			switch (Yelling.getMyLevel()) {
+				case 0:
+					protagonist.getBody().applyForceToCenter(0, 0, true);
+					break;
+				case 1:
+					protagonist.getBody().applyForceToCenter(0, 150, true);
+					break;
+				case 2:
+					protagonist.getBody().applyForceToCenter(0, 200, true);
+					break;
+				case 3:
+					protagonist.getBody().applyForceToCenter(0, 300, true);
+					break;
+				default:
+					break;
 			}
 		}
 

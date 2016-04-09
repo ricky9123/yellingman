@@ -34,6 +34,21 @@ public class Yelling extends Game {
 	// ������Դ������
 	public static AssetManager assetManager;
 
+	static Callback callback;
+
+	static int myLevel = 1;
+	public interface Callback{
+		public abstract int getLevelOfSound();
+	}
+
+	public static int getMyLevel() {
+		myLevel = callback.getLevelOfSound();
+		return myLevel;
+	}
+	public Yelling(Callback callback) {
+		this.callback = callback;
+
+	}
 	@Override
 	public void create() {
 		// ʵ������Դ������

@@ -11,6 +11,14 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new Yelling(), config);
+		initialize(new Yelling(new Yelling.Callback() {
+			@Override
+			public int getLevelOfSound() {
+				JumpLevel jump = JumpLevel.getJumpLevel();
+				jump.getNoiseLevel();
+				int level = jump.jumpLevel;
+				return level;
+			}
+		}), config);
 	}
 }

@@ -77,19 +77,19 @@ public class JumpLevel {
 
                     Log.d(TAG, "" + volume);
 
-                    if (volume < 50) {
+                    if (volume < 80) {
                         jumpLevel = 0;
 
-                    } else if (volume >= 50 && volume < 85) {
+                    } else if (volume >= 80 && volume < 82) {
 
                         jumpLevel = 1;
 
-                    } else if (volume >= 85) {
+                    } else if (volume >= 82) {
                         jumpLevel = 2;
 
 
                     } else {
-                        jumpLevel = 3;
+                        ;
 
                     }
 

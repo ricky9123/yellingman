@@ -13,6 +13,7 @@ class User(restful.Resource):
         data = request.get_json()
         password = data['password']
         name = data['name']
+        # print id, password, name
         create_user(id, password, name)
 
 

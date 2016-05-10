@@ -259,7 +259,7 @@ public class GameScreen extends YellScreen {
 				// ����body ���оߣ�
 				bodyDef.type = BodyType.StaticBody;
 				bodyDef.position.set(
-						(col + 1f) * tileSize / RATE,
+						(col + 0.5f) * tileSize / RATE,
 						(row + 1f) * tileSize / RATE);
 				ChainShape cs = new ChainShape();
 //				//������ʽͼ�Σ����Ҵ���������ͼ������
@@ -423,10 +423,10 @@ public class GameScreen extends YellScreen {
 					protagonist.getBody().applyForceToCenter(0, 0, true);
 					break;
 				case 1:
-					protagonist.getBody().applyForceToCenter(0, 150, true);
+					protagonist.getBody().applyForceToCenter(0, 50, true);
 					break;
 				case 2:
-					protagonist.getBody().applyForceToCenter(0, 200, true);
+					protagonist.getBody().applyForceToCenter(0, 210, true);
 					break;
 				case 3:
 					protagonist.getBody().applyForceToCenter(0, 300, true);
